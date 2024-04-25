@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+  ~ Copyright (c) 2021 Ventum Consulting GmbH
+  -->
+
+<!DOCTYPE Plugin PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Plugin certificationLevel="None"
+		name="motd"
+		displayName="Message Of The Day"
+		minSystemVersion="8.0"
+		maxSystemVersion="8.4"
+		version="%%VERSION%%"
+		rightRequired="ViewMessageOfTheDayRight"
+>
+
+	<Attributes>
+		<Map>
+			<entry key="fullPage" >
+				<value>
+					<FullPage title="Message of the Day"/>
+				</value>
+			</entry>
+
+			<entry key="minUpgradableVersion" value="1.0.0"/>
+
+			<entry key="restResources">
+				<value>
+				  <List>
+					  <String>com.ventum.iiq.plugins.motd.resources.rest.MotdResource</String>
+				  </List>
+				</value>
+			</entry>
+
+			<entry key="serviceExecutors">
+				<value>
+				  <List>
+				  </List>
+				</value>
+				</entry>
+
+			<entry key="settings">
+				<value>
+					<List>
+					</List>
+				</value>
+			</entry>
+
+			<entry key="snippets">
+				<value>
+					<List>
+						<Snippet regexPattern=".*" rightRequired="ViewMessageOfTheDayRight">
+							<Scripts>
+								<String>ui/js/snippet.js</String>
+							</Scripts>
+						</Snippet>
+
+						<Snippet regexPattern=".*home\.jsf.*">
+							<Scripts>
+								<String>ui/js/HtmlSanitizer.js</String>
+								<String>ui/js/MOTD-WidgetModule.js</String>
+							</Scripts>
+						</Snippet>
+
+						<Snippet regexPattern=".*plugins\/pluginPage\.jsf.*" rightRequired="ViewMessageOfTheDayRight">
+							<Scripts>
+								<String>ui/js/HtmlSanitizer.js</String>
+								<String>ui/js/MOTD-Module.js</String>
+							</Scripts>
+							<StyleSheets>
+								<String>/ui/css/codemirror/codemirror.css</String>
+								<String>/ui/css/codemirror/codemirror_custom.css</String>
+								<String>/ui/css/codemirror/codemirror_showHint.css</String>
+							</StyleSheets>
+						</Snippet>
+					</List>
+				</value>
+			</entry>
+		</Map>
+  </Attributes>
+</Plugin>

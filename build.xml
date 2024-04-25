@@ -1,0 +1,92 @@
+<!--
+~ Copyright (c) 2021 Ventum Consulting GmbH
+-->
+<project name="motd" basedir=".">
+	<description>
+		motd build file
+	</description>
+
+	<target name="init">
+		<echo level="info">------------ init ------------</echo>
+
+		<property name="build" value="${basedir}/ant-build"/>
+		<property name="resourceDir" value="${build}/resources"/>
+		<property name="classesDir" value="${build}/classes"/>
+		<property name="javaVersion" value="1.${java.release.version}"/>
+		<property name="runClean" value="true"/>
+
+		<echo level="info">project.version:  ${project.version}</echo>
+		<echo level="info">javaVersion:      ${javaVersion}</echo>
+		<echo level="info">runClean:         ${runClean}</echo>
+
+		<echo level="info">------------------------------</echo>
+		<echo level="info"/>
+	</target>
+
+	<target name="clean" if="${runClean}">
+		<echo level="info">------------ clean ------------</echo>
+
+		<delete dir="${build}"/>
+
+		<echo level="info">-------------------------------</echo>
+		<echo level="info"/>
+	</target>
+
+	<target name="prepareFiles">
+		<echo level="info">------------ prepareFiles ------------</echo>
+
+		<copy todir="${resourceDir}/">
+			<fileset dir="src/main/resources">
+				<exclude name="**/.keep"/>
+				<exclude name="**/*.iml"/>
+			</fileset>
+			<fileset dir="src/main/webapp/">
+				<exclude name="**/.keep"/>
+				<exclude name="**/*.iml"/>
+			</fileset>
+		</copy>
+
+		<replace file="${resourceDir}/manifest.xml" token="%%VERSION%%" value="${project.version}"/>
+
+		<echo level="info">--------------------------------------</echo>
+		<echo level="info"/>
+	</target>
+
+	<target name="compile">
+		<echo level="info">------------ compile ------------</echo>
+
+		<mkdir dir="${classesDir}"/>
+
+		<javac
+			srcdir="src/main/java"
+			source="${javaVersion}"
+			target="${javaVersion}"
+			destdir="${classesDir}"
+			classpathref="maven.compile.classpath"
+			includeantruntime="last"
+		/>
+
+		<echo level="info">---------------------------------</echo>
+		<echo level="info"/>
+	</target>
+
+	<target name="jar">
+		<echo level="info">------------ jar ------------</echo>
+
+		<jar destfile="${resourceDir}/lib/motd-${project.version}.jar" basedir="${classesDir}"/>
+
+		<echo level="info">-----------------------------</echo>
+		<echo level="info"/>
+	</target>
+
+	<target name="zip">
+		<echo level="info">------------ zip ------------</echo>
+
+		<zip destfile="${build}/motd-${project.version}.zip" basedir="${resourceDir}"/>
+
+		<echo level="info">-----------------------------</echo>
+		<echo level="info"/>
+	</target>
+
+	<target name="package" depends="init, clean, prepareFiles, compile, jar, zip"/>
+</project>

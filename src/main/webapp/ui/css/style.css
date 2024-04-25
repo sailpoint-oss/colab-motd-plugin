@@ -1,0 +1,310 @@
+/*
+ * Copyright (c) 2021 Ventum Consulting GmbH
+ */
+
+.motdplug-center {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 50%;
+
+    grid-template-areas:
+        "top top"
+        "left right";
+}
+
+#motdplug-top {
+    grid-area: top;
+    grid-column: 1 / -1;
+    padding: 0 25px;
+}
+
+.motdplug-left {
+    grid-area: left
+}
+
+.motdplug-right {
+    grid-area: right
+}
+
+@media (max-width: 1075px) {
+    .motdplug-center {
+        grid-template-areas:
+        "top"
+        "left"
+        "right";
+
+        grid-template-columns: 100%;
+    }
+}
+
+
+.col-lg-4,
+.col-md-6,
+.col-lg-4 .col-md-6 {
+    width: 100% !important;
+}
+
+
+.motdplug-custom-textarea {
+    min-height: 50px; /* if you want Flexible textarea/div then give min-height instead of height */
+    padding: 2px;
+    resize: both;
+    width: 400px;
+    font-size: 11px;
+    font-family: monospace;
+
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 1px solid gray;
+    height: 28px;
+    overflow: auto;
+}
+
+
+.motdplug-htmlInput {
+    width: 100% !important;
+    padding: 10px !important;
+    border: 1px #b5b8c8 solid;
+}
+
+textarea.motdplug-htmlInput {
+    grid-row: 1;
+    grid-column: 1;
+
+    background-color: #00000000;
+    caret-color: black;
+    color: #00000000;
+}
+
+div.motdplug-htmlInput {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.motdplug-padded {
+    padding: 15px 25px;
+}
+
+.motdplug-flex {
+    display: flex;
+    flex-flow: column;
+}
+
+
+.motdplug-labeled-row {
+    align-items: center;
+    display: flex;
+    padding: 10px 0;
+    width: fit-content;
+}
+
+.motdplug-labeled-row > input {
+    margin-top: 0 !important;
+    margin-right: 10px !important;
+}
+
+.motdplug-labeled-column {
+    display: flex;
+    flex-flow: column;
+}
+
+.motdplug-select {
+    width: 85%;
+    padding: 5px;
+}
+
+.motdplug-labeled-column > span {
+    margin: 0 !important;
+    margin-top: 2px !important;
+}
+
+.motdplug-text-and-logo-wrapper {
+    min-height: 48px;
+    display: grid;
+    grid-template-rows: auto;
+
+    grid-template-areas:
+        "left right";
+}
+
+.motdplug-text-and-logo-wrapper .motdplug-right {
+    justify-self: flex-end;
+}
+
+.motdplug-logo {
+    height: 48px;
+}
+
+.motdplug-logo-wrapper {
+    display: flex;
+    height: 48px;
+    align-items: center;
+    justify-self: end;
+    justify-content: flex-end;
+}
+
+.motdplug-logo-wrapper .motdplug-logo-tooltip {
+    visibility: hidden;
+    width: 160px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: relative;
+    left: 135px;
+    top: 49px;
+    margin-left: -124px;
+
+    z-index: 1;
+
+    opacity : 0;
+    transition: visibility 400ms, opacity 400ms;
+}
+
+.motdplug-logo-wrapper:hover .motdplug-logo-tooltip {
+    visibility: visible;
+    opacity : 0.73;
+}
+
+.motdplug-error-and-button-wrapper {
+    min-height: 48px;
+    display: grid;
+    grid-template-rows: auto;
+
+    grid-template-areas:
+        "left right";
+}
+
+.motdplug-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+}
+
+.motdplug-delete-button-wrapper {
+    display: grid;
+    align-items: center;
+    justify-items: end;
+
+    margin: 15px 0;
+}
+
+.motdplug-button {
+    width: 70px !important;
+    min-width: fit-content !important;
+}
+
+.motdplug-button > button:focus {
+    outline-style: none;
+}
+
+.motdplug-checkmark {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    stroke-width: 5;
+    stroke: #bcbe00;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px #bcbe00;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    margin-right: 8px;
+}
+.motdplug-checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+    fill: #fff;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+
+}
+
+.motdplug-checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+    0%, 100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px #4bb71b;
+    }
+}
+
+.motdplug-select-wrapper {
+    display: flex;
+}
+
+.motdplug-loading {
+    width: 28px;
+    height: 28px;
+    margin-left: 10px;
+    align-self: center;
+}
+
+.motdplug-htmlFooterOutput {
+    padding: 0;
+}
+
+.motdplug-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: black;
+    opacity: 0.3;
+}
+
+.motdplug-dialog {
+    display: grid;
+    width: 50%;
+    min-height: 150px;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    right: 0;
+    margin: auto;
+    z-index: 100;
+}
+
+.motdplug-redButton {
+    background-image: -webkit-linear-gradient(top, #c40000, #a10303) !important;
+    border-color: #a10303 !important;
+}
+
+.motdplug-redButton:hover, .motdplug-redButton:focus {
+    background-color: #c70000 !important;
+    border-color: #cc0000 !important;
+}
+
+.motdplug-margin {
+    margin: 5px 10px;
+}
+
+.motdplug-margin.spContentTitle {
+    margin: 5px 10px !important;
+    margin-top: 10px !important;
+    padding: 0 !important;
+}

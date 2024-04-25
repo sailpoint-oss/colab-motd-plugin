@@ -1,0 +1,18 @@
+/*
+ * Copyright (c) 2021 Ventum Consulting GmbH
+ */
+
+.motdplug-htmlBodyEditor-wrapper,
+.motdplug-htmlFooterEditor-wrapper > .CodeMirror {
+    border: 1px solid gray;
+}
+
+
+.motdplug-htmlBodyEditor-wrapper > .CodeMirror {
+    height: 250px;
+}
+
+.motdplug-htmlFooterEditor-wrapper > .CodeMirror {
+    height: 150px;
+}
+

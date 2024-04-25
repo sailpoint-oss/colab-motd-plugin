@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+  ~ Copyright (c) 2021 Ventum Consulting GmbH
+  -->
+
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint>
+  <SPRight name="ViewMessageOfTheDayRight" displayName="Use Message of the Day">
+    <Description>Allows a user to view the Message of the Day</Description>
+  </SPRight>
+
+  <Capability name="MessageOfTheDayCapability" displayName="Message of the Day Plugin Admin">
+    <Description>The capability give the identity access to the Message of the Day</Description>
+    <RightRefs>
+      <Reference class="sailpoint.object.SPRight" name="ViewMessageOfTheDayRight"/>
+    </RightRefs>
+  </Capability>
+</sailpoint>

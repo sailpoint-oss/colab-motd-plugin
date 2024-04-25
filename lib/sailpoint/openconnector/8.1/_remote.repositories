@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Jul 21 13:26:48 CEST 2021
+openconnector-8.1.jar>=
+openconnector-8.1.pom>=
