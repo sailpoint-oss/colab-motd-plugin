@@ -249,7 +249,7 @@
     <jcl-over-slf4j.version>8.1</jcl-over-slf4j.version>
     <jersey-common.version>2.1</jersey-common.version>
     <jsonassert.version>1.5.0</jsonassert.version>
-    <junit.version>4.12</junit.version>
+    <junit.version>4.13.1</junit.version>
     <log4j-jcl.version>2.14.1</log4j-jcl.version>
     <log4j.version>1.2.17</log4j.version>
     <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
