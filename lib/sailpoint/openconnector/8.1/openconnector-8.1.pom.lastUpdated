@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Thu Jul 22 10:33:00 CEST 2021
+https\://repo.maven.apache.org/maven2/.lastUpdated=1626942780755
+@default-gitlab-maven-${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/.lastUpdated=1626942780686
+https\://repo.maven.apache.org/maven2/.error=
+${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/.error=Could not transfer artifact sailpoint\:openconnector\:pom\:8.1 from/to gitlab-maven (${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven)\: Cannot access ${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven with type default using the available connector factories\: BasicRepositoryConnectorFactory

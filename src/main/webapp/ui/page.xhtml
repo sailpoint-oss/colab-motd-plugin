@@ -1,0 +1,355 @@
+<!--
+  - Copyright (c) 2021 Ventum Consulting GmbH
+  -->
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<title>Message of the Day</title>
+
+	<link rel="stylesheet" href="#{plugins.requestContextPath}/plugin/motd/ui/css/style.css"
+		  type="text/css"/>
+
+	<script src="#{plugins.requestContextPath}/plugin/motd/ui/js/SailPointBundleLibrary.js"></script>
+	<script src="#{plugins.requestContextPath}/plugin/motd/ui/js/codemirror/codemirror.js"></script>
+
+	<script src="#{plugins.requestContextPath}/plugin/motd/ui/js/codemirror/mode/codemirror_css.js"></script>
+	<script src="#{plugins.requestContextPath}/plugin/motd/ui/js/codemirror/mode/codemirror_javascript.js"></script>
+	<script src="#{plugins.requestContextPath}/plugin/motd/ui/js/codemirror/mode/codemirror_xml.js"></script>
+	<script src="#{plugins.requestContextPath}/plugin/motd/ui/js/codemirror/mode/codemirror_htmlmixed.js"></script>
+
+	<script src="#{plugins.requestContextPath}/plugin/motd/ui/js/codemirror/hint/codemirror_showHint.js"></script>
+	<script src="#{plugins.requestContextPath}/plugin/motd/ui/js/codemirror/hint/codemirror_xmlHint.js"></script>
+	<script src="#{plugins.requestContextPath}/plugin/motd/ui/js/codemirror/hint/codemirror_htmlHint.js"></script>
+
+	<style>
+        .sp-body-container {
+            overflow: hidden !important;
+        }
+	</style>
+</head>
+
+<body class="motdplug-div">
+	<div ng-app="motdplug" class="motdplug-center" ng-controller="motdplugCtrl as ctrl">
+		<div style="display: none" class="motdplug-overlay"></div>
+		<div style="display: none" class="motdplug-dialog panel motdplug-labeled-column">
+			<div class="motdplug-margin spContentTitle">
+				Confirmation Dialog
+			</div>
+			<div class="motdplug-margin motdplug-padded greyborder">
+				<span>{{ctrl.dialogText}}</span>
+			</div>
+			<div class="motdplug-margin motdplug-button-wrapper">
+				<div ng-click="ctrl.dialogOkHandler()"
+					 class="motdplug-button x-btn primaryBtn x-toolbar-item x-btn-default-toolbar-small x-noicon x-btn-noicon x-btn-default-toolbar-small-noicon x-over x-btn-over x-btn-default-toolbar-small-over over"
+					 style="border-width: 1px; left: 0; top: 0; margin: 0 10px 0 0;">
+					<button type="button" class="x-btn-center" hidefocus="true"
+							role="button"
+							style="height: 16px;">
+						<span class="x-btn-inner">Yes</span>
+					</button>
+				</div>
+
+				<div ng-click="ctrl.closeDialog()"
+					 class="motdplug-button x-btn primaryBtn motdplug-redButton x-toolbar-item x-btn-default-toolbar-small x-noicon x-btn-noicon x-btn-default-toolbar-small-noicon x-over x-btn-over x-btn-default-toolbar-small-over over"
+					 style="border-width: 1px; left: 0; top: 0; margin: 0;">
+					<button type="button" class="x-btn-center" hidefocus="true"
+							role="button"
+							style="height: 16px;">
+						<span class="x-btn-inner">No</span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="motdplug-top" class="bg-light lter b-b bodyHeaderDiv">
+			<div id="bodyDivTitle">
+				<h1>Edit Message of the Day messages</h1>
+			</div>
+		</div>
+
+		<div id="motdplug-left" class="motdplug-padded">
+			<section class="panel motdplug-padded">
+				<div class="spContentTitle">
+					Select the message
+				</div>
+				<div class="motdplug-padded greyborder">
+					<div class="motdplug-text-and-logo-wrapper">
+						<div class="motdplug-left">
+							Please select a message to be displayed in widget. <br/>
+							To activate selected message check "Set as the new active message" below and click save.
+						</div>
+
+						<div class="motdplug-right">
+							<div class="motdplug-logo-wrapper">
+								<span class="motdplug-logo-tooltip">Ventum Consulting GmbH</span>
+								<svg class="motdplug-logo" viewBox="0 0 368.5 333.23">
+									<defs>
+										<style>.e {
+                                            fill: url(#d);
+                                        }
+
+                                        .f {
+                                            fill: #8cbc23;
+                                        }
+
+                                        .g {
+                                            fill: #565656;
+                                        }</style>
+										<linearGradient
+											id="d" x1="147.07" y1="176.77" x2="253.57" y2="176.77"
+											gradientTransform="matrix(1, 0, 0, 1, 0, 0)" gradientUnits="userSpaceOnUse">
+											<stop
+												offset="0" stop-color="#055300"/>
+											<stop offset=".12" stop-color="#1e6a00"/>
+											<stop offset=".26" stop-color="#357f00"/>
+											<stop
+												offset=".35" stop-color="#3e8700"/>
+											<stop offset=".5" stop-color="#58990c"/>
+											<stop offset=".7" stop-color="#74ac18"/>
+											<stop
+												offset=".87" stop-color="#85b720"/>
+											<stop offset="1" stop-color="#8cbc23"/>
+										</linearGradient>
+									</defs>
+									<g id="c">
+										<path class="f"
+											  d="M263.13,77.41c-3.22-21.77,14.96-38.18,34.36-38.18s38.95,12.03,36.59,38.18c-1.76,19.56-16.51,32.07-35.82,41.06-21.06,9.8-44.58,15.81-42.03-2.66,1.14-8.27,10.45-14.39,6.9-38.4Z"/>
+										<path
+											class="e"
+											d="M249.36,136.14c-7.66-5.96-23.54,2.18-41.99,7.45-2.12,.61-4.17,1.13-6.16,1.57-3.72,1.14-7.65,1.76-11.71,1.76-1.38,0-2.74-.08-4.08-.21-7.13-.41-13.34-2.65-19.01-7.07-4.23-2.92-8.03-6.63-11.1-10.93,1.14,2.06,3.24,10.93-3.6,31.46-2.8,8.4-4.65,15.61-4.65,24.47,0,6.26,1.5,10.59,1.9,11.64,.03,.08,.06,.16,.1,.25,0,0-.04-.09-.1-.25-.23-.57-.45-1.14-.67-1.69,.17,.48,.34,.97,.55,1.46,5.21,12.49,16.81,25.42,31.71,28.06,29.96,5.32,57.79-18.92,67.72-45.3,5.81-15.44,7.77-37.46,1.09-42.66Z"/>
+										<path
+											class="f"
+											d="M147.07,184.63c0-8.85,1.85-16.06,4.65-24.47,6.84-20.54,4.73-29.41,3.6-31.46-5.75-7.93-8.85-17.57-8.85-28.43,0-1.85,.11-3.67,.3-5.46,.97-13.67,5.06-27.75,4.89-39.21-.14-29.94-27.07-55.61-59.66-55.61C57.35,0,35.43,25.55,35.43,55.51c0,28.03,16.03,45.55,50.61,59.47,25.39,10.22,46.46,18.67,52.85,47.99,2.93,13.45,5.3,21.37,10.17,33.54,0,0-1.99-4.66-1.99-11.88Z"/>
+										<g>
+											<path
+												class="g"
+												d="M11.71,277.47l17.79,44.61,17.78-44.61h11.72l-20.32,50.19c-1.81,4.06-4.23,5.57-9.17,5.57s-7.37-1.51-9.18-5.57L0,277.47H11.71Z"/>
+											<path
+												class="g"
+												d="M66.11,293.39c0-10.45,6.41-15.82,20.17-15.82h16.18c10.62,0,17.14,5.18,17.14,13.99v6.49l-42.62,16.62v2.43c.97,4.97,2.3,6.09,7.49,6.09h35.85v9.12h-36.46c-6.41,0-10.63-1.52-14.13-5.27-2.29-2.53-3.63-5.68-3.63-9.12v-24.53Zm10.87,11.25l31.75-12.37v-.81c0-3.54-1.69-4.77-6.64-4.77h-17.75c-5.19,0-7.36,2.03-7.36,6.9v11.05Z"/>
+											<path
+												class="g"
+												d="M131.96,291.66c0-9.12,6.52-14.09,18.36-14.09h17.14c11.83,0,18.35,4.97,18.35,14.09v40.66h-10.86v-42.08c-.49-1.93-3.02-3.36-7.37-3.36h-17.54c-5.68,0-7.21,1.52-7.21,5.89v39.54h-10.86v-40.66Z"/>
+											<polygon
+												class="g"
+												points="198.14 259.32 209 259.32 209 277.57 220.23 277.57 220.23 286.69 209 286.69 209 332.32 198.14 332.32 198.14 259.32"/>
+											<path
+												class="g"
+												d="M228.52,277.57h10.87v41.77l.12,.31c.49,1.93,2.9,3.36,7.36,3.36h17.27c5.55,0,7.36-1.52,7.36-5.89v-39.54h10.87v40.66c0,9.12-6.52,14.09-18.35,14.09h-17.15c-11.82,0-18.35-4.97-18.35-14.09v-40.66Z"/>
+											<path
+												class="g"
+												d="M293.77,291.46c0-8.12,4.11-12.58,11.95-13.68,.97-.11,2.05-.21,3.02-.21h9.78c.96,0,1.81,.1,2.78,.21,5.2,.6,7.97,2.13,9.78,4.56,1.94-2.43,4.71-3.96,9.9-4.56,.97-.11,1.81-.21,2.66-.21h9.9c.97,0,1.94,.1,3.03,.21,7.84,1.11,11.95,5.57,11.95,13.68v40.86h-10.86v-40.16c0-3.34-2.17-5.16-6.52-5.16h-9.54c-3.14,.5-4.35,2.03-4.35,5.68v39.64h-10.86v-39.64c0-.41-.12-.81-.12-1.12-.73-3.25-2.53-4.67-6.65-4.67h-8.57c-.49,0-.84,0-1.33,.11-3.74,.41-4.59,1.32-5.06,4.36v40.96h-10.88v-40.86Z"/>
+										</g>
+									</g>
+								</svg>
+							</div>
+						</div>
+					</div>
+
+					<label class="motdplug-labeled-column">
+						<span>Selected message</span>
+						<span class="motdplug-select-wrapper">
+                            <select ng-init="ctrl.selectActiveMessage" ng-model="ctrl.selectActiveMessage"
+									ng-options="name for name in ctrl.messageNames"
+									ng-change="ctrl.refreshData()"
+									class="motdplug-select">
+                            </select>
+
+                            <svg class="motdplug-loading" style="background: rgb(255, 255, 255); display: none; shape-rendering: auto;"
+								 width="100px" height="100px" viewBox="25 25 50 50" preserveAspectRatio="xMidYMid">
+                                <g transform="rotate(0 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-1.104417670682731s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(30 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-1.004016064257028s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(60 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-0.9036144578313252s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(90 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-0.8032128514056224s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(120 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-0.7028112449799196s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(150 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-0.6024096385542168s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(180 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-0.502008032128514s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(210 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-0.4016064257028112s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(240 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-0.3012048192771084s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(270 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-0.2008032128514056s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(300 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="-0.1004016064257028s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                                <g transform="rotate(330 50 50)">
+                                    <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#bcbe00">
+                                        <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.2048192771084336s"
+												 begin="0s"
+												 repeatCount="indefinite"></animate>
+                                    </rect>
+                                </g>
+                            </svg>
+                        </span>
+					</label>
+
+					<div class="motdplug-delete-button-wrapper">
+						<div ng-click="ctrl.deleteMessageDialog()"
+							 class="motdplug-button x-btn primaryBtn motdplug-redButton x-toolbar-item x-btn-default-toolbar-small x-noicon x-btn-noicon x-btn-default-toolbar-small-noicon x-over x-btn-over x-btn-default-toolbar-small-over over"
+							 style="border-width: 1px; left: 0; top: 0; margin: 0;">
+							<button type="button" class="x-btn-center" hidefocus="true"
+									role="button"
+									style="height: 16px;">
+								<span class="x-btn-inner">Delete message</span>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="spContentTitle">
+					Create or edit a message
+				</div>
+				<div class="motdplug-padded greyborder motdplug-flex motdplug-editor-wrap">
+					Here you can create or edit a message using HTML
+					<br/>
+					<br/>
+
+					<label for="motdplug-htmlName">
+						<span class="requiredText">*</span>
+						Message Name
+					</label>
+					<input id="motdplug-htmlName" ng-model="ctrl.htmlName"/>
+
+					<br/>
+
+					<label for="motdplug-htmlBody">
+						<span class="requiredText">*</span>
+						Message Body
+					</label>
+					<div class="motdplug-htmlBodyEditor-wrapper">
+						<textarea id="motdplug-htmlBody" cols="900" rows="10"/>
+					</div>
+					<br/>
+
+					<label for="motdplug-htmlFooter">Message Footer</label>
+					<div class="motdplug-htmlFooterEditor-wrapper">
+                        <textarea id="motdplug-htmlFooter" cols="900"
+								  rows="5"/>
+					</div>
+					<br/>
+
+					<label for="motdplug-activeCheckbox" class="motdplug-labeled-row">
+						<input id="motdplug-activeCheckbox" type="checkbox" ng-model="ctrl.newActiveCheckbox"/>
+						<span>Set as the new active message</span>
+					</label>
+
+
+					<div class="motdplug-error-and-button-wrapper">
+						<div class="motdplug-left">
+							<div style="display: none" class="formError">{{ctrl.messageAddErrorText}}</div>
+						</div>
+
+						<div class="motdplug-right motdplug-button-wrapper">
+							<svg style="display: none" class="motdplug-checkmark" viewBox="0 0 52 52">
+								<circle class="motdplug-checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+								<path class="motdplug-checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+							</svg>
+							<div ng-click="ctrl.saveMessageDialog()"
+								 class="motdplug-button x-btn primaryBtn x-toolbar-item x-btn-default-toolbar-small x-noicon x-btn-noicon x-btn-default-toolbar-small-noicon x-over x-btn-over x-btn-default-toolbar-small-over over"
+								 style="border-width: 1px; left: 0; top: 0; margin: 0;">
+								<button type="button" class="x-btn-center" hidefocus="true"
+										role="button"
+										style="height: 16px;">
+									<span class="x-btn-inner">Save</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<div class="motdplug-right motdplug-padded">
+			<div class="col-lg-4 col-md-6 ng-scope">
+				<sp-widget sp-widget="widget" class="ng-isolate-scope">
+					<section class="panel home-widget ng-scope">
+						<header class="panel-heading">
+							<div class="widget-title font-thin">
+                                <span class="text-ellipsis ng-binding" title="Message of the Day">
+                                    Live Preview
+                                </span>
+							</div>
+						</header>
+						<sp-reference-plugin-widget sp-widget="widget">
+							<div class="risk-widget">
+								<div class="motdplug-body panel-body motdplug-htmlBodyOutput">
+
+								</div>
+								<div class="panel-footer motdplug-htmlFooterOutput">
+
+								</div>
+							</div>
+						</sp-reference-plugin-widget>
+					</section>
+				</sp-widget>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

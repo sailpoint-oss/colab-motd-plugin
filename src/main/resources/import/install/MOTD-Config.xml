@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+  ~ Copyright (c) 2021 Ventum Consulting GmbH
+  -->
+
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint>
+  <Custom name="MOTDConfigObject">
+    <Attributes>
+      <Map>
+        <entry key="title" value="Message of the Day"/>
+        <entry key="activeMessage"/>
+        <entry key="messages">
+          <value>
+            <Map></Map>
+          </value>
+        </entry>
+      </Map>
+    </Attributes>
+  </Custom>
+</sailpoint>

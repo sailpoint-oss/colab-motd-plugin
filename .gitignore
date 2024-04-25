@@ -1,0 +1,8 @@
+out/
+dev/
+target/
+**/.idea/
+*/*.iml
+*.iml
+/pom.xml.versionsBackup
+/ant-build/
